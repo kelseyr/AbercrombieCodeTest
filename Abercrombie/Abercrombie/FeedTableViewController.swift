@@ -87,13 +87,28 @@ class FeedTableViewController: UITableViewController, FeedParserDelegate {
         
     }
     
+    func parsingOutContentSnippet(row: Int) ->String{
+        let item = feedItems[row] as FeedItem
+        let content = item.feedContent
+        
+        let range: Range<String.Index> = content!.rangeOfString("</font></b></font><br><font size=\"-1\">")!
+        let range2: Range<String.Index> = content!.rangeOfString("&nbsp;")!
+        
+        let contentSnippet = content![range.endIndex...range2.startIndex]
+        
+        return contentSnippet
+    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("feedCell", forIndexPath: indexPath) as! FeedCell
         
         let item = feedItems[indexPath.row] as FeedItem
         
         cell.feedTitleLabel.text = item.feedTitle
-        cell.subTitleLabel.text = item.feedContentSnippet
+        
+        var contentSnippet = parsingOutContentSnippet(indexPath.row)
+        
+        cell.subTitleLabel.text = contentSnippet
         
         let imageString = parsingOutImage(indexPath.row)
         let imageURL = NSURL(string: imageString)
