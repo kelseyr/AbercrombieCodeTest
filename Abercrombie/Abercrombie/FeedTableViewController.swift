@@ -54,6 +54,11 @@ class FeedTableViewController: UITableViewController, FeedParserDelegate {
         //check for online
         
         if(!Reachability.isConnectedToNetwork()){
+            let alert = UIAlertView()
+            alert.title = "Offline Mode"
+            alert.message = "You are currently offline.  Please connect to get new stories from Google News"
+            alert.addButtonWithTitle("OK")
+            alert.show()
             readArrayWithCustomObjFromUserDefaults()
         }
         else{
