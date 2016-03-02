@@ -12,6 +12,7 @@ class FeedTableViewController: UITableViewController, FeedParserDelegate {
     
     var feedItems = [FeedItem]()
     var selectedIndex = 0
+    var savedImages = [UIImage]()
     
     enum VendingMachineError: ErrorType {
         case InvalidSelection
@@ -52,7 +53,9 @@ class FeedTableViewController: UITableViewController, FeedParserDelegate {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        feedItems.removeAll()
         request()
+        tableView.reloadData()
 
     }
     
@@ -105,12 +108,24 @@ class FeedTableViewController: UITableViewController, FeedParserDelegate {
         let item = feedItems[indexPath.row] as FeedItem
         
         cell.feedTitleLabel.text = item.feedTitle
+        cell.feedTitleLabel.numberOfLines = 0
+        cell.feedTitleLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
         
-        var contentSnippet = parsingOutContentSnippet(indexPath.row)
+        let contentSnippet = parsingOutContentSnippet(indexPath.row)
         
         cell.subTitleLabel.text = contentSnippet
+        cell.feedImage.image = getImageForCell(indexPath.row)
+    
+        return cell
+    }
+    
+    func getImageForCell(row: Int) -> UIImage{
         
-        let imageString = parsingOutImage(indexPath.row)
+        if ((savedImages.count)-1 >= row){
+            return savedImages[row]
+        }
+        
+        let imageString = parsingOutImage(row)
         let imageURL = NSURL(string: imageString)
         var imageData = NSData()
         
@@ -120,16 +135,16 @@ class FeedTableViewController: UITableViewController, FeedParserDelegate {
         catch{
             print(error)
             imageData = NSData(data: UIImagePNGRepresentation(UIImage(imageLiteral: "rss.png"))!)
-
+            
             //TODO: set imageData to the rss picture
         }
         
-        let tempImage =  UIImage(data: imageData)
+        let tempImage =  UIImage(data: imageData)!
         
-        cell.feedImage.image = tempImage
+        savedImages.insert(tempImage, atIndex: row)
+    
+        return tempImage
         
-        
-        return cell
     }
     
     
