@@ -13,6 +13,7 @@ class FeedTableViewController: UITableViewController, FeedParserDelegate {
     var feedItems = [FeedItem]()
     var selectedIndex = 0
     var savedImages = [UIImage]()
+    let prefs = NSUserDefaults.standardUserDefaults()
     
     enum VendingMachineError: ErrorType {
         case InvalidSelection
@@ -34,10 +35,6 @@ class FeedTableViewController: UITableViewController, FeedParserDelegate {
         feedItems = [FeedItem]()
     }
     
-    func feedParserDidFinish(parser: FeedParser!) {
-        self.tableView.reloadData()
-    }
-    
     func feedParser(parser: FeedParser, didParseChannel channel: FeedChannel) {
         self.title = channel.channelTitle
     }
@@ -54,8 +51,17 @@ class FeedTableViewController: UITableViewController, FeedParserDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         feedItems.removeAll()
-        request()
-        tableView.reloadData()
+        //check for online
+        
+        if(!Reachability.isConnectedToNetwork()){
+            readArrayWithCustomObjFromUserDefaults()
+        }
+        else{
+            request()
+            self.writeArrayWithCustomObjToUserDefaults()
+        }
+        
+//        tableView.reloadData()
 
     }
     
@@ -139,11 +145,16 @@ class FeedTableViewController: UITableViewController, FeedParserDelegate {
             //TODO: set imageData to the rss picture
         }
         
-        let tempImage =  UIImage(data: imageData)!
         
-        savedImages.insert(tempImage, atIndex: row)
-    
-        return tempImage
+        if let tempImage =  UIImage(data: imageData){
+            savedImages.insert(tempImage, atIndex: row)
+            return tempImage
+        }
+            
+        else{
+            savedImages.insert(UIImage(imageLiteral: "rss.png"), atIndex: row)
+            return UIImage(imageLiteral: "rss.png")
+        }
         
     }
     
@@ -171,6 +182,33 @@ class FeedTableViewController: UITableViewController, FeedParserDelegate {
             
         }
         
+    }
+    
+//MARK: User Defaults
+    
+    func writeArrayWithCustomObjToUserDefaults(){
+        var iter = 0
+        for item in feedItems{
+            prefs.setObject(item.feedTitle, forKey: String(iter) + "Title")
+            prefs.setObject(item.feedContent, forKey: String(iter) + "Content")
+            iter++
+        }
+        prefs.setObject(iter, forKey: "NumberOfFeedItems")
+        prefs.setObject("Top Stories - Google News", forKey: "MainTitle")
+        
+    }
+    
+    func readArrayWithCustomObjFromUserDefaults(){
+        let count = prefs.integerForKey("NumberOfFeedItems")
+        var iter = 0
+        while iter <= count{
+            let tempFeedItem = FeedItem()
+            tempFeedItem.feedTitle = prefs.stringForKey(String(iter) + "Title")
+            tempFeedItem.feedContent = prefs.stringForKey(String(iter) + "Content")
+            feedItems.append(tempFeedItem)
+            iter++
+        }
+        self.title = prefs.stringForKey("MainTitle")
     }
 }
 

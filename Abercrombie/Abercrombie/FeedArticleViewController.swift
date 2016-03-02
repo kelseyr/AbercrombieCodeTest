@@ -17,9 +17,16 @@ class FeedArticleViewController: UIViewController, UIWebViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let url = NSURL(string: feedItem.feedLink!)
-        let requestObj = NSURLRequest(URL: url!)
-        webView.loadRequest(requestObj)
+        if(feedItem.feedLink == nil){
+            var constructionString = "<t>" + "\n" + "\n" + "\n"
+            constructionString.appendContentsOf("\n" + (feedItem.feedTitle)!+"</t> \n")
+            constructionString.appendContentsOf("<p>" + (feedItem.feedContent)! + "</p>")
+            webView.loadHTMLString(constructionString, baseURL: nil)
+        }else{
+            let url = NSURL(string: feedItem.feedLink!)
+            let requestObj = NSURLRequest(URL: url!)
+            webView.loadRequest(requestObj)
+        }
     }
 
     override func didReceiveMemoryWarning() {

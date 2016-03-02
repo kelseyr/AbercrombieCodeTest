@@ -14,12 +14,12 @@
 		5572A2E61C86358A00582E7B /* FeedArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5572A2E51C86358A00582E7B /* FeedArticleViewController.swift */; };
 		5572A2EB1C863C6E00582E7B /* rss.png in Resources */ = {isa = PBXBuildFile; fileRef = 5572A2EA1C863C6E00582E7B /* rss.png */; };
 		5572A2ED1C8745C600582E7B /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5572A2EC1C8745C600582E7B /* FeedCell.swift */; };
+		55B77EB81C876B2A00A60A56 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B77EB71C876B2A00A60A56 /* Reachability.swift */; };
 		55CFC4721C84A99B00E151AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CFC4711C84A99B00E151AB /* AppDelegate.swift */; };
 		55CFC4771C84A99B00E151AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55CFC4751C84A99B00E151AB /* Main.storyboard */; };
 		55CFC47C1C84A99B00E151AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55CFC47B1C84A99B00E151AB /* Assets.xcassets */; };
 		55CFC48A1C84A99B00E151AB /* AbercrombieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CFC4891C84A99B00E151AB /* AbercrombieTests.swift */; };
 		55CFC4951C84A99B00E151AB /* AbercrombieUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CFC4941C84A99B00E151AB /* AbercrombieUITests.swift */; };
-		55CFC4A31C84A9AE00E151AB /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CFC4A21C84A9AE00E151AB /* CoreData.framework */; };
 		55CFC4A51C84AB9F00E151AB /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CFC4A41C84AB9F00E151AB /* FeedTableViewController.swift */; };
 		55CFC4A81C84AD4C00E151AB /* FeedParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CFC4A71C84AD4C00E151AB /* FeedParser.swift */; };
 /* End PBXBuildFile section */
@@ -49,6 +49,7 @@
 		5572A2E51C86358A00582E7B /* FeedArticleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedArticleViewController.swift; sourceTree = "<group>"; };
 		5572A2EA1C863C6E00582E7B /* rss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rss.png; sourceTree = "<group>"; };
 		5572A2EC1C8745C600582E7B /* FeedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
+		55B77EB71C876B2A00A60A56 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		55CFC46E1C84A99B00E151AB /* Abercrombie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Abercrombie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55CFC4711C84A99B00E151AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55CFC4761C84A99B00E151AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -60,7 +61,6 @@
 		55CFC4901C84A99B00E151AB /* AbercrombieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AbercrombieUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		55CFC4941C84A99B00E151AB /* AbercrombieUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbercrombieUITests.swift; sourceTree = "<group>"; };
 		55CFC4961C84A99B00E151AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		55CFC4A21C84A9AE00E151AB /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		55CFC4A41C84AB9F00E151AB /* FeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
 		55CFC4A71C84AD4C00E151AB /* FeedParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedParser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -70,7 +70,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55CFC4A31C84A9AE00E151AB /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,7 +93,6 @@
 		55CFC4651C84A99B00E151AB = {
 			isa = PBXGroup;
 			children = (
-				55CFC4A21C84A9AE00E151AB /* CoreData.framework */,
 				55CFC4701C84A99B00E151AB /* Abercrombie */,
 				55CFC4881C84A99B00E151AB /* AbercrombieTests */,
 				55CFC4931C84A99B00E151AB /* AbercrombieUITests */,
@@ -117,6 +115,7 @@
 			children = (
 				55CFC4A61C84AD2800E151AB /* SwiftFeedParser */,
 				55CFC4711C84A99B00E151AB /* AppDelegate.swift */,
+				55B77EB71C876B2A00A60A56 /* Reachability.swift */,
 				55CFC4751C84A99B00E151AB /* Main.storyboard */,
 				55CFC47B1C84A99B00E151AB /* Assets.xcassets */,
 				5572A2EA1C863C6E00582E7B /* rss.png */,
@@ -298,6 +297,7 @@
 				5549FAD11C8623D1002E12B1 /* FeedItem.swift in Sources */,
 				55CFC4721C84A99B00E151AB /* AppDelegate.swift in Sources */,
 				55CFC4A51C84AB9F00E151AB /* FeedTableViewController.swift in Sources */,
+				55B77EB81C876B2A00A60A56 /* Reachability.swift in Sources */,
 				5572A2ED1C8745C600582E7B /* FeedCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
